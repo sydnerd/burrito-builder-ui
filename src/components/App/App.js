@@ -13,15 +13,19 @@ class App extends Component {
     }
   }
 
-  componentDidMount() {
+  getAllOrders = () => {
     getOrders()
-      .then(data => this.setState({orders: data.orders}))
-      .catch(error => this.setState({error: 'We are having difficulties  with our server, please try again later!'}));
+    .then(data => this.setState({orders: data.orders}))
+    .catch(error => this.setState({error: 'We are having difficulties  with our server, please try again later!'}));
+  }
+
+  componentDidMount() {
+   this.getAllOrders()
   }
 
   addNewOrder = (newBurrito) => {
     addOrder(newBurrito)
-      .then(() => getOrders())
+      .then(() => this.getAllOrders())
       .catch(error => this.setState({error: 'We are having difficulties  with our server, please try again later!'}));
   }
 
@@ -30,7 +34,7 @@ class App extends Component {
       <main className="App">
         <header>
           <h1>Burrito Builder</h1>
-          <OrderForm />
+          <OrderForm addNewOrder = {this.addNewOrder}/>
         </header>
 
         <Orders orders={this.state.orders}/>
