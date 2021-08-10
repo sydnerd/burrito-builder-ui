@@ -39,4 +39,7 @@ describe('Main page', () => {
   })
 })
 
-//Need to test
+//Need to test:
+  //1. Submitting a new order
+  //test that the new card showed up
+  //maybe test the order selection updates as well 
