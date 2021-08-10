@@ -26,7 +26,9 @@ class OrderForm extends Component {
       name: this.state.name,
       ingredients: this.state.ingredients
     }
-    this.props.addNewOrder(newBurrito)
+    if(this.state.name && this.state.ingredients.length) {
+      this.props.addNewOrder(newBurrito)
+    } 
   }
 
   clearInputs = () => {
