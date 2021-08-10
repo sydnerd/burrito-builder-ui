@@ -9,13 +9,20 @@ class App extends Component {
     super();
     this.state = {
       orders: [],
+      error: ''
     }
   }
 
   componentDidMount() {
     getOrders()
       .then(data => this.setState({orders: data.orders}))
-      .catch(err => console.error('Error fetching:', err));
+      .catch(error => this.setState({error: 'We are having difficulties  with our server, please try again later!'}));
+  }
+
+  addNewOrder = (newBurrito) => {
+    addOrder(newBurrito)
+      .then(() => getOrders())
+      .catch(error => this.setState({error: 'We are having difficulties  with our server, please try again later!'}));
   }
 
   render() {
